@@ -50,6 +50,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
     public void CheckScore()
     {
         if (this.score % 100 == 0) AddHP();
