@@ -5,8 +5,8 @@ using System.Collections;
 public class UIController : MonoBehaviour
 {
 
-    int score = 0;
-    int hp = 100;
+    private int score = 0;
+    private int hp = 100;
     GameObject scoreText;
     GameObject gameOverText;
     Slider hpbar;

@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 public class PlayerController : MonoBehaviour
 {
-
-    public GameObject bulletPrefab;
-
+    [SerializeField]
+    private int SHOT_INTERVAL = 10;
     private int timeCount;
+    public GameObject bulletPrefab;
 
     void Update()
     {
-
-        // 連射機構のため
-        timeCount += 1;
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(-0.1f, 0, 0);
@@ -22,18 +20,22 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(0.1f, 0, 0);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            
-        }
+
+        // 連射
         if (Input.GetKey(KeyCode.Space))
         {
-            // 連射
-            if (timeCount % 10 == 0)
+            timeCount++;
+
+            if (timeCount > SHOT_INTERVAL)
             {
+                timeCount = 0;
                 Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                GameObject.Find("Canvas").GetComponent<UIController>().RemoveHP(2);
+                GameObject.Find("Canvas").GetComponent<UIController>().RemoveHP(1);
             }
+        }
+        else
+        {
+            timeCount = SHOT_INTERVAL;
         }
     }
 }
