@@ -19,9 +19,9 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void AddScore()
+    public void AddScore(int val =10)
     {
-        this.score += 10;
+        this.score += val;
         CheckScore();
     }
 

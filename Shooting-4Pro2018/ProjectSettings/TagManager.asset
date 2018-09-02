@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Enemy
+  - EnemyBullet
+  - PlayerBullet
   - Rock
   layers:
   - Default
@@ -16,8 +19,8 @@ TagManager:
   - 
   - Player
   - Enemy
-  - Bullet(Player)
-  - Bullet(Enemy)
+  - Bullet (Player)
+  - Bullet (Enemy)
   - DestroyArea
   - 
   - 

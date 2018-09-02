@@ -3,16 +3,26 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    // ヒットポイント
+    public int hp = 1;
+
     // Spaceshipコンポーネント
     Spaceship spaceship;
 
     IEnumerator Start()
     {
+
         // Spaceshipコンポーネントを取得
         spaceship = GetComponent<Spaceship>();
 
         // ローカル座標のY軸のマイナス方向に移動する
-        spaceship.Move(transform.up * -1);
+        Move(transform.up * -1);
+
+        // canShotがfalseの場合、ここでコルーチンを終了させる
+        if (spaceship.canShot == false)
+        {
+            yield break;
+        }
 
         while (true)
         {
@@ -29,6 +39,55 @@ public class Enemy : MonoBehaviour
 
             // shotDelay秒待つ
             yield return new WaitForSeconds(spaceship.shotDelay);
+        }
+    }
+
+    // 機体の移動
+    public void Move(Vector2 direction)
+    {
+        GetComponent<Rigidbody2D>().velocity = direction * spaceship.speed;
+    }
+
+    void OnTriggerEnter2D(Collider2D c)
+    {
+
+        Debug.Log("HitEnemy");
+
+        // レイヤー名を取得
+        string layerName = LayerMask.LayerToName(c.gameObject.layer);
+
+        // レイヤー名がBullet (Player)以外の時は何も行わない
+        if (layerName != "Bullet (Player)") return;
+
+        // PlayerBulletのTransformを取得
+        //Transform playerBulletTransform = c.transform.parent;
+        Transform playerBulletTransform = c.transform.parent;
+
+
+        // Bulletコンポーネントを取得
+        BulletPlayer bullet = playerBulletTransform.GetComponent<BulletPlayer>();
+
+        // ヒットポイントを減らす
+        hp = hp - bullet.power;
+
+        // 弾の削除
+        Destroy(c.gameObject);
+
+        // ヒットポイントが0以下であれば
+        if (hp <= 0)
+        {
+            // 爆発
+            spaceship.Explosion();
+
+            // エネミーの削除
+            Destroy(gameObject);
+
+        }
+        else
+        {
+
+            spaceship.GetAnimator().SetTrigger("Damage");
+
         }
     }
 }
