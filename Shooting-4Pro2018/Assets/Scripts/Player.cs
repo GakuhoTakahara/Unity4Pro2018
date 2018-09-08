@@ -5,23 +5,39 @@ public class Player : MonoBehaviour
 {
     // Spaceshipコンポーネント
     Spaceship spaceship;
+    int timeCount;
 
-    IEnumerator Start()
+    private void Start()
     {
         // Spaceshipコンポーネントを取得
         spaceship = GetComponent<Spaceship>();
+    }
 
-        while (true)
+    // HP
+    private int hp = 100;
+
+    void ShotBullet()
+    {
+        
+        int SHOT_INTERVAL = spaceship.shotInterva;
+
+        if (Input.GetKey(KeyCode.X))
         {
-
-            // 弾をプレイヤーと同じ位置/角度で作成
-            spaceship.Shot(transform);
-
-            // ショット音を鳴らす
-            GetComponent<AudioSource>().Play();
-
-            // shotDelay秒待つ
-            yield return new WaitForSeconds(spaceship.shotDelay);
+            timeCount++;
+            //カウントが発射間隔に達したら、弾を発射
+            if (timeCount > SHOT_INTERVAL)
+            {
+                timeCount = 0;  //カウント初期化
+                // 弾をプレイヤーと同じ位置/角度で作成
+                spaceship.Shot(transform);
+                // ショット音を鳴らす
+                GetComponent<AudioSource>().Play();
+            }
+        }
+        else
+        {
+            // ボタンが押されていない場合、次弾用意
+            timeCount = SHOT_INTERVAL;
         }
     }
 
@@ -35,6 +51,9 @@ public class Player : MonoBehaviour
 
         // 移動する向きを求める
         Vector2 direction = new Vector2(x, y).normalized;
+
+        // 弾の発射
+        ShotBullet();
 
         // 移動の制限
         Move(direction);
@@ -81,14 +100,32 @@ public class Player : MonoBehaviour
             Destroy(c.gameObject);
         }
 
-        // レイヤー名がBullet (Enemy)またはEnemyの場合は爆発
+        // レイヤー名がBullet (Enemy)またはEnemyの場合はHpを下げる
         if (layerName == "Bullet (Enemy)" || layerName == "Enemy")
         {
-            // 爆発する
-            spaceship.Explosion();
+            switch (layerName)
+            {
+                case "Bullet (Enemy)":
+                    SetHp(5);
+                    break;
 
-            // プレイヤーを削除
-            Destroy(gameObject);
+                case "Enemy":
+                    SetHp(10);
+                    break;
+            }
+            if (GetHp() == 0) Destroy(gameObject);
         }
+    }
+
+    public void SetHp(int val)
+    {
+        hp -= val;
+        if (hp > 100) hp = 100;
+        if (hp < 0) hp = 0;
+    }
+
+    public int GetHp()
+    {
+        return hp;
     }
 }

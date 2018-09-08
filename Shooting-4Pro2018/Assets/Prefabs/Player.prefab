@@ -216,7 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  shotDelay: 0.05
+  shotInterva: 15
+  shotDelay: 1
   bullet: {fileID: 1905931944504972, guid: cda64f722e87b7f418ff7fec2631a4f9, type: 2}
   canShot: 0
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -231,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9db9144c646494e8d93e0a051e844d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
 --- !u!212 &212421237369554574
 SpriteRenderer:
   m_ObjectHideFlags: 1

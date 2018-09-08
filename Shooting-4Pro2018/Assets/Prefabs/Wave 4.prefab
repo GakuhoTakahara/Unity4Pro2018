@@ -2252,7 +2252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2268,7 +2269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2296,7 +2298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2312,7 +2315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2340,7 +2344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2368,7 +2373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2420,7 +2426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2436,7 +2443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2476,7 +2484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2492,7 +2501,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}
@@ -2508,7 +2518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  shotDelay: 0.3
+  shotInterva: 10
+  shotDelay: 1
   bullet: {fileID: 1602831685470386, guid: 80ef0bf3ddf129c439f3c524b433d9c5, type: 2}
   canShot: 1
   explosion: {fileID: 1668550553738556, guid: a7ed0315d0e664da9bcb03d47e23e682, type: 2}

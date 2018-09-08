@@ -5,8 +5,18 @@ public class Manager : MonoBehaviour
     // Playerプレハブ
     public GameObject player;
 
+    // オリジナルの
+
+
+    // Playerスクリプト
+    Player playerScript; 
+
     // タイトル
     private GameObject title;
+
+    // HpBat
+    public SimpleHealthBar hpBar;
+
 
     void Start()
     {
@@ -21,6 +31,13 @@ public class Manager : MonoBehaviour
         {
             GameStart();
         }
+
+        // Play中ならHpbBarをセット
+        if (IsPlaying() == true)
+        {
+            SetHpBar();
+            if (playerScript.GetHp() == 0) GameOver();
+        }
     }
 
     void GameStart()
@@ -28,6 +45,8 @@ public class Manager : MonoBehaviour
         // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
         title.SetActive(false);
         Instantiate(player, player.transform.position, player.transform.rotation);
+        player = GameObject.Find("Player(Clone)");
+        playerScript = player.GetComponent<Player>();
     }
 
     public void GameOver()
@@ -35,6 +54,14 @@ public class Manager : MonoBehaviour
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
     }
+
+   void SetHpBar()
+    {
+        int val = playerScript.GetHp();
+        hpBar.UpdateBar(val, 100f);
+        Debug.Log("SetHP:" + val);
+    }
+
 
     public bool IsPlaying()
     {

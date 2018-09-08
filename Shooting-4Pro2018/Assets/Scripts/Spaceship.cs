@@ -6,8 +6,11 @@ public class Spaceship : MonoBehaviour
     // 移動スピード
     public float speed;
 
-    // 弾を撃つ間隔
-    public float shotDelay;
+    // 弾を撃つ間隔(Player)
+    public int shotInterva=10;
+
+    // 弾を撃つ間隔(Enemy)
+    public int shotDelay=1;
 
     // 弾のPrefab
     public GameObject bullet;
