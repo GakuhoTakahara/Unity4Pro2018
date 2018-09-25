@@ -5,7 +5,8 @@ public class Manager : MonoBehaviour
     // Playerプレハブ
     public GameObject player;
 
-    // オリジナルの
+    // Playing Playerプレハブ
+    public GameObject player_origin;
 
 
     // Playerスクリプト
@@ -36,7 +37,7 @@ public class Manager : MonoBehaviour
         if (IsPlaying() == true)
         {
             SetHpBar();
-            if (playerScript.GetHp() == 0) GameOver();
+           // if (playerScript.GetHp() == 0) GameOver();
         }
     }
 
@@ -44,7 +45,8 @@ public class Manager : MonoBehaviour
     {
         // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
         title.SetActive(false);
-        Instantiate(player, player.transform.position, player.transform.rotation);
+        Instantiate(player_origin, player_origin.transform.position, player_origin.transform.rotation);
+        //player_origin = player;
         player = GameObject.Find("Player(Clone)");
         playerScript = player.GetComponent<Player>();
     }
@@ -55,7 +57,7 @@ public class Manager : MonoBehaviour
         title.SetActive(true);
     }
 
-   void SetHpBar()
+   public void SetHpBar()
     {
         int val = playerScript.GetHp();
         hpBar.UpdateBar(val, 100f);

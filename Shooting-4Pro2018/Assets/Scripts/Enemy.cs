@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour
     // ヒットポイント
     public int hp = 1;
 
+    // スコアのポイント
+    public int point = 100;
+
     // Spaceshipコンポーネント
     Spaceship spaceship;
 

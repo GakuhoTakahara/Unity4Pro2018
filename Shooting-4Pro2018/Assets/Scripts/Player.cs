@@ -7,14 +7,15 @@ public class Player : MonoBehaviour
     Spaceship spaceship;
     int timeCount;
 
+    // HP
+    private int hp = 100;
+
+
     private void Start()
     {
         // Spaceshipコンポーネントを取得
         spaceship = GetComponent<Spaceship>();
     }
-
-    // HP
-    private int hp = 100;
 
     void ShotBullet()
     {
@@ -57,6 +58,8 @@ public class Player : MonoBehaviour
 
         // 移動の制限
         Move(direction);
+
+        
 
     }
 
@@ -113,11 +116,17 @@ public class Player : MonoBehaviour
                     SetHp(10);
                     break;
             }
-            if (GetHp() == 0) Destroy(gameObject);
+        }
+
+        if (GetHp() == 0)
+        {
+            FindObjectOfType<Manager>().SetHpBar();
+            FindObjectOfType<Manager>().GameOver();
+            Destroy(gameObject);
         }
     }
 
-    public void SetHp(int val)
+public void SetHp(int val)
     {
         hp -= val;
         if (hp > 100) hp = 100;
