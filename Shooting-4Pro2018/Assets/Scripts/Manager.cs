@@ -8,7 +8,6 @@ public class Manager : MonoBehaviour
     // Playing Playerプレハブ
     public GameObject player_origin;
 
-
     // Playerスクリプト
     Player playerScript; 
 
@@ -17,6 +16,10 @@ public class Manager : MonoBehaviour
 
     // HpBat
     public SimpleHealthBar hpBar;
+
+
+    // ゲーム終了時ゲームオーバーかクリアか
+    private string GameState = "Playing";
 
 
     void Start()
@@ -43,6 +46,10 @@ public class Manager : MonoBehaviour
 
     void GameStart()
     {
+
+        // スコアを初期化する
+        FindObjectOfType<Score>().Initialize();
+
         // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
         title.SetActive(false);
         Instantiate(player_origin, player_origin.transform.position, player_origin.transform.rotation);
@@ -51,8 +58,12 @@ public class Manager : MonoBehaviour
         playerScript = player.GetComponent<Player>();
     }
 
-    public void GameOver()
+    // ゲームが完全に終了したときに呼ぶ
+    public void GameFinish()
     {
+        // ハイスコアの保存
+        FindObjectOfType<Score>().Sava();
+
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
     }
@@ -64,6 +75,23 @@ public class Manager : MonoBehaviour
         Debug.Log("SetHP:" + val);
     }
 
+    // ゲームの状態をセット
+    public void SetState(string state)
+    {
+        if (state != "Playing" || state != "GameClear" || state != "GameOvar")
+        {
+            return;
+        }
+
+        //値をセット
+        GameState = state;
+    }
+
+    // ゲームの状態を返す
+    public string GetState()
+    {
+        return GameState;
+    }
 
     public bool IsPlaying()
     {

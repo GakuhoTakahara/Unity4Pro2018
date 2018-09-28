@@ -37,7 +37,7 @@ public class Score : MonoBehaviour {
 	}
 
     // ゲーム開始前の状態に戻す
-    private void Initialize()
+    public void Initialize()
     {
         // スコアを0に戻す
         score = 0;
@@ -47,7 +47,7 @@ public class Score : MonoBehaviour {
     }
 
     // ポイントの追加
-    public void addPoint(int point)
+    public void AddPoint(int point)
     {
         score = score + point;
     }

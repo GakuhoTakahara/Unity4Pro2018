@@ -19,4 +19,11 @@ public class Bullet : MonoBehaviour
         // lifeTime秒後に削除
         Destroy(gameObject, lifeTime);
     }
+
+    private void OnCollisionStay2D(Collision2D c)
+    {
+        string layerName = LayerMask.LayerToName(c.gameObject.layer);
+        if (layerName != "DestroyArea") return;
+        Destroy(gameObject);
+    }
 }

@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     // スコアのポイント
     public int point = 100;
 
+    // ラスボスかどうか
+    public bool finalBoss;
+
     // Spaceshipコンポーネント
     Spaceship spaceship;
 
@@ -74,8 +77,17 @@ public class Enemy : MonoBehaviour
         // ヒットポイントが0以下であれば
         if (hp <= 0)
         {
+
+            // スコアコンポーネントを取得しポイントを追加
+            FindObjectOfType<Score>().AddPoint(point);
             // 爆発
             spaceship.Explosion();
+
+            // ラスボスならラスボスが倒されたフラグを立てる
+            if (finalBoss == true)
+            {
+                FindObjectOfType<Manager>().SetState("GameClear");
+            }
 
             // エネミーの削除
             Destroy(gameObject);

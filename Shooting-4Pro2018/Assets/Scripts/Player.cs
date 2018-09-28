@@ -117,12 +117,15 @@ public class Player : MonoBehaviour
                     break;
             }
         }
-
+        
+        // ゲームオーバー
         if (GetHp() == 0)
         {
+            // Barの値を確実に書き換える
             FindObjectOfType<Manager>().SetHpBar();
-            FindObjectOfType<Manager>().GameOver();
-            Destroy(gameObject);
+
+            // ゲームオーバーのフラグを立てる
+            FindObjectOfType<Manager>().SetState("GameOvar");
         }
     }
 
