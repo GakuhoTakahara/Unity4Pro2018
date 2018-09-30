@@ -124,6 +124,9 @@ public class Player : MonoBehaviour
             // Barの値を確実に書き換える
             FindObjectOfType<Manager>().SetHpBar();
 
+            // Playerを削除
+            Destroy(gameObject);
+
             // ゲームオーバーのフラグを立てる
             FindObjectOfType<Manager>().SetState("GameOvar");
         }

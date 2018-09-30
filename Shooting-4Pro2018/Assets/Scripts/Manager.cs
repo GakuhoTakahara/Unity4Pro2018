@@ -61,8 +61,8 @@ public class Manager : MonoBehaviour
     // ゲームが完全に終了したときに呼ぶ
     public void GameFinish()
     {
-        // ハイスコアの保存
-        FindObjectOfType<Score>().Sava();
+        // スコア,HPのリセット
+        FindObjectOfType<Score>().Initialize();
 
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
@@ -78,13 +78,17 @@ public class Manager : MonoBehaviour
     // ゲームの状態をセット
     public void SetState(string state)
     {
-        if (state != "Playing" || state != "GameClear" || state != "GameOvar")
+        if (state == "Playing" || state == "GameClear" || state == "GameOvar")
+        {
+            //値をセット
+            GameState = state;
+            Debug.Log("See State:" + state);
+        }
+        else
         {
             return;
         }
 
-        //値をセット
-        GameState = state;
     }
 
     // ゲームの状態を返す
