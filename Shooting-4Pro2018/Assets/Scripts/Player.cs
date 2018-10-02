@@ -10,11 +10,28 @@ public class Player : MonoBehaviour
     // HP
     private int hp = 100;
 
+    // Bulletの持ち数
+    private int playerBullet;
+
+    // Bulletの持ち数の最大数
+    public int playerBulletMax = 100;
+
+    // 何秒ごとに弾を補充するか
+    public float addBulletTime = 5;
+
+    // 弾をいくつ補充するか
+    public int addBulletCount = 10;
 
     private void Start()
     {
         // Spaceshipコンポーネントを取得
         spaceship = GetComponent<Spaceship>();
+
+        // 弾の持ち数を最大値にセット
+        SetPlayerBullet(playerBulletMax);
+
+        // コルーチンをセット
+        StartCoroutine(AddPlayerBullet());
     }
 
     void ShotBullet()
@@ -22,7 +39,7 @@ public class Player : MonoBehaviour
         
         int SHOT_INTERVAL = spaceship.shotInterva;
 
-        if (Input.GetKey(KeyCode.X))
+        if ((Input.GetKey(KeyCode.X))&&(GetPlayerBullet()>0))
         {
             timeCount++;
             //カウントが発射間隔に達したら、弾を発射
@@ -33,6 +50,9 @@ public class Player : MonoBehaviour
                 spaceship.Shot(transform);
                 // ショット音を鳴らす
                 GetComponent<AudioSource>().Play();
+
+                // 弾の持ち数を減らす
+                SetPlayerBullet(-1);
             }
         }
         else
@@ -132,15 +152,47 @@ public class Player : MonoBehaviour
         }
     }
 
-public void SetHp(int val)
+    // HPを一定時間ごとに追加
+    IEnumerator AddPlayerBullet()
+    {
+        while (true)
+        {
+            SetPlayerBullet(addBulletCount);
+            yield return new WaitForSeconds(addBulletTime);
+        }
+    }
+
+    // HPをセット
+    public void SetHp(int val)
     {
         hp -= val;
         if (hp > 100) hp = 100;
         if (hp < 0) hp = 0;
     }
 
+    // 現在のHPを取得
     public int GetHp()
     {
         return hp;
+    }
+
+    // 球数をセット
+    public void SetPlayerBullet(int val)
+    {
+        playerBullet += val;
+        if (playerBullet > playerBulletMax) playerBullet = playerBulletMax;
+        else if (playerBullet < 0) playerBullet = 0;
+    }
+
+    // 残りの球数を取得
+    public int GetPlayerBullet()
+    {
+        return playerBullet;
+    }
+
+    // 球数の最大値を取得
+    public int GetPlayerBulletMax()
+    {
+        return playerBulletMax;
     }
 }

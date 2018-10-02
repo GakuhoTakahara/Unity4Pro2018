@@ -14,9 +14,11 @@ public class Manager : MonoBehaviour
     // タイトル
     private GameObject title;
 
-    // HpBat
+    // HpBar
     public SimpleHealthBar hpBar;
 
+    // BulletBar
+    public SimpleHealthBar bulletBar;
 
     // ゲーム終了時ゲームオーバーかクリアか
     private string GameState = "Playing";
@@ -36,10 +38,11 @@ public class Manager : MonoBehaviour
             GameStart();
         }
 
-        // Play中ならHpbBarをセット
+        // Play中ならBarをセット
         if (IsPlaying() == true)
         {
             SetHpBar();
+            SetBulletBar();
            // if (playerScript.GetHp() == 0) GameOver();
         }
     }
@@ -73,6 +76,15 @@ public class Manager : MonoBehaviour
         int val = playerScript.GetHp();
         hpBar.UpdateBar(val, 100f);
         Debug.Log("SetHP:" + val);
+    }
+
+    public void SetBulletBar()
+    {
+        if (FindObjectOfType<Player>()) {
+            int val = FindObjectOfType<Player>().GetPlayerBullet();
+            int max = FindObjectOfType<Player>().GetPlayerBulletMax();
+            bulletBar.UpdateBar(val, max);
+        }
     }
 
     // ゲームの状態をセット

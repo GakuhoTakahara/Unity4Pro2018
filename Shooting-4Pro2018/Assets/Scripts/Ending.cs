@@ -22,7 +22,7 @@ public class Ending : MonoBehaviour {
 	void Update () {
 
         // エンディング中でなければ
-        if (isEnding() == false)
+        if (IsEnding() == false)
         {
             // ゲームの状態を取得
             switch (FindObjectOfType<Manager>().GetState())
@@ -35,7 +35,7 @@ public class Ending : MonoBehaviour {
                 // ゲームオーバー
                 case "GameOvar":
                     // エンディング中にする
-                    setEndingState(true);
+                    SetEndingState(true);
 
                     // ゲームオーバー演出の実行
                     GameOvar();
@@ -44,7 +44,7 @@ public class Ending : MonoBehaviour {
                 // ゲームクリア
                 case "GameClear":
                     // エンディング中にする
-                    setEndingState(true);
+                    SetEndingState(true);
 
                     // ゲームクリア演出の実行
                     GameClear();
@@ -59,7 +59,8 @@ public class Ending : MonoBehaviour {
     private void GameOvar()
     {
         gameOvar.SetActive(true);
-        Debug.Log("Called GameOvar()");
+        ScreenRanking();
+       Debug.Log("Called GameOvar()");
     }
 
 
@@ -72,14 +73,22 @@ public class Ending : MonoBehaviour {
     }
    
     // エンディング中かどうかセットする
-    public void setEndingState(bool state)
+    public void SetEndingState(bool state)
     {
        nowState = state;
     }
 
     // エンディング中かどうか
-    public bool isEnding()
+    public bool IsEnding()
     {
         return nowState;
+    }
+
+    // ランキングをセットする
+    public void ScreenRanking()
+    {
+
+        FindObjectOfType<Score>().Sava();
+
     }
 }
