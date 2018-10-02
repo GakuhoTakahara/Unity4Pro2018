@@ -17,6 +17,9 @@ public class Score : MonoBehaviour {
     // ハイスコア
     private int highScore;
 
+    // 最後のスコア
+    private int lastScore;
+
     // PlayerPlefsでhighScoreを保存するときのキー
     private string highScoreKey = "highScore";
 
@@ -77,6 +80,9 @@ public class Score : MonoBehaviour {
     // ハイスコアの保存
     public void Sava()
     {
+        // 最後のランキングをセットする
+        lastScore = score;
+
         //プレイ人数を増やす
         PlayerPrefs.SetInt(playCountKey, PlayerPrefs.GetInt(playCountKey, 0)+1);
 
@@ -89,7 +95,7 @@ public class Score : MonoBehaviour {
         SaveRanking(score);
         SetRanking();
 
-        CheckRank(score);
+        GetRank(score);
 
        // ゲーム開始前の状態に戻す
        Initialize();
@@ -152,7 +158,9 @@ public class Score : MonoBehaviour {
         rankingText.text = ranking_string.ToString();
     }
 
-    public int CheckRank(int myVal)
+
+    // ランキングを取得
+    public int[] GetRank(int myVal)
     {
         // 順位
         int rank = 1;
@@ -171,8 +179,22 @@ public class Score : MonoBehaviour {
         }
 
         for (int i = 0; ranking[i] > myVal; i++) rank++;
-        Debug.Log("My Ranking:" + rank+"位 / "+ PlayerPrefs.GetInt(playCountKey)+" 人");
-        return rank;
+
+        Debug.Log("My Ranking:" + rank + "位 / " + PlayerPrefs.GetInt(playCountKey) + " 人");
+
+        string rankText = rank + "位 / " + PlayerPrefs.GetInt(playCountKey) + " 人";
+
+        // 戻り値用の配列
+        int[] rankAndCount = new int[] { rank, PlayerPrefs.GetInt(playCountKey) };
+
+        return rankAndCount;
+
+    }
+
+    // スコアを取得
+    public int GetLastScore()
+    {
+        return lastScore;
     }
 
     private void AllResetKey()

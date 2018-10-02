@@ -43,7 +43,7 @@ public class Manager : MonoBehaviour
         {
             SetHpBar();
             SetBulletBar();
-           // if (playerScript.GetHp() == 0) GameOver();
+           //if (playerScript.GetHp() == 0) GameOver();
         }
     }
 

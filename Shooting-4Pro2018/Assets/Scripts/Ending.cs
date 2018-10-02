@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ending : MonoBehaviour {
 
@@ -10,6 +11,16 @@ public class Ending : MonoBehaviour {
     // Endingオブジェクト
     public GameObject gameClear;
     public GameObject gameOvar;
+    public GameObject gameResults;
+
+    // ゲーム結果テキスト
+    // スコア
+    public Text resultsScoreText;
+    // ランキング
+    public Text resultsRankingText;
+
+    // GameOvar画面を表示する時間
+    public float gameOvarTime = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -55,12 +66,15 @@ public class Ending : MonoBehaviour {
     }
 
 
+
+
     // ゲームオーバー
     private void GameOvar()
     {
+        Debug.Log("Called GameOvar()");
         gameOvar.SetActive(true);
         ScreenRanking();
-       Debug.Log("Called GameOvar()");
+        Invoke("GameResults", gameOvarTime);
     }
 
 
@@ -71,7 +85,29 @@ public class Ending : MonoBehaviour {
         gameClear.SetActive(true);
         Debug.Log("Called GameClear()");
     }
-   
+
+    // ゲーム結果を表示
+    private void GameResults()
+    {
+        // Game Clear/Ovar 画面を無効化
+        gameOvar.SetActive(false);
+        gameClear.SetActive(false);
+
+        // スコアを取得
+        int _score = FindObjectOfType<Score>().GetLastScore();
+
+        // ランキング表示用のテキストを作成
+        int[] rankVal = FindObjectOfType<Score>().GetRank(_score);
+        string rankText = rankVal[0].ToString() + " 位 / " + rankVal[1].ToString() + " 人";
+
+        // ゲーム結果を表示
+        gameResults.SetActive(true);
+
+        // ゲーム結果の値をセット
+        resultsScoreText.text =_score.ToString() + " point";
+        resultsRankingText.text = rankText;
+    }
+
     // エンディング中かどうかセットする
     public void SetEndingState(bool state)
     {

@@ -235,6 +235,8 @@ MonoBehaviour:
   playerBulletMax: 100
   addBulletTime: 5
   addBulletCount: 10
+  addHpTime: 10
+  addHpCount: 5
 --- !u!212 &212421237369554574
 SpriteRenderer:
   m_ObjectHideFlags: 1

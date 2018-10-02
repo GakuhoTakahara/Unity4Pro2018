@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
     // 弾をいくつ補充するか
     public int addBulletCount = 10;
 
+    // 何秒ごとにHPを追加するか
+    public float addHpTime = 10;
+
+    // HPをいくつ追加するか
+    public int addHpCount = 5;
+
     private void Start()
     {
         // Spaceshipコンポーネントを取得
@@ -30,8 +36,12 @@ public class Player : MonoBehaviour
         // 弾の持ち数を最大値にセット
         SetPlayerBullet(playerBulletMax);
 
-        // コルーチンをセット
+        // Bulletコルーチンをセット
         StartCoroutine(AddPlayerBullet());
+
+        // Hpコルーチンをセット
+        StartCoroutine(AddHpAuto());
+
     }
 
     void ShotBullet()
@@ -159,6 +169,16 @@ public class Player : MonoBehaviour
         {
             SetPlayerBullet(addBulletCount);
             yield return new WaitForSeconds(addBulletTime);
+        }
+    }
+
+    IEnumerator AddHpAuto()
+    {
+        while (true)
+        {
+            int val = -1 * addHpCount;
+            SetHp(val);
+            yield return new WaitForSeconds(addHpTime);
         }
     }
 
