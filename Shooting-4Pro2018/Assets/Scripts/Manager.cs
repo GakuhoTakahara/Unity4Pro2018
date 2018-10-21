@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Manager : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class Manager : MonoBehaviour
     public GameObject player_origin;
 
     // Playerスクリプト
-    Player playerScript; 
+    Player playerScript;
 
     // タイトル
     private GameObject title;
@@ -23,11 +25,23 @@ public class Manager : MonoBehaviour
     // ゲーム終了時ゲームオーバーかクリアか
     private string GameState = "Playing";
 
+    // NameImage
+    public Image nameImage;
+
+    // PlayerImage
+    public Image playerImage;
+
+    // プレイヤーしたIDを保存するPlayerPrefKey
+    private string playedIdKey = "playedId";
+
 
     void Start()
     {
         // Titleゲームオブジェクトを検索し取得する
         title = GameObject.Find("Title");
+
+        // タイトルにNextPlayerをセット
+        TitleImageSet();
     }
 
     void Update()
@@ -43,7 +57,7 @@ public class Manager : MonoBehaviour
         {
             SetHpBar();
             SetBulletBar();
-           //if (playerScript.GetHp() == 0) GameOver();
+            //if (playerScript.GetHp() == 0) GameOver();
         }
     }
 
@@ -67,11 +81,17 @@ public class Manager : MonoBehaviour
         // スコア,HPのリセット
         FindObjectOfType<Score>().Initialize();
 
+        // プレイ済みのIDとを更新
+        setPlayedId();
+
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
+
+        // タイトルにNextPlayerをセット
+        TitleImageSet();
     }
 
-   public void SetHpBar()
+    public void SetHpBar()
     {
         int val = playerScript.GetHp();
         hpBar.UpdateBar(val, 100f);
@@ -102,6 +122,34 @@ public class Manager : MonoBehaviour
         }
 
     }
+
+    // 最後のPlay ID を取得
+    public int getPlayedId()
+    {
+        return PlayerPrefs.GetInt(playedIdKey, -1);
+    }
+
+    // プレイ済みのIDを更新
+    public void setPlayedId()
+    {
+        var oldId = getPlayedId();
+        var newId = oldId + 1;
+        PlayerPrefs.SetInt(playedIdKey, newId);
+        PlayerPrefs.Save();
+
+    }
+
+    // TitleにImageをセット
+    public void TitleImageSet()
+    {
+        string playerImgStr = "Player/" + (getPlayedId()+1).ToString();
+        Sprite playerImg = Resources.Load<Sprite>(playerImgStr);
+        string nameImgStr = "Name/" + (getPlayedId() + 1).ToString();
+        Sprite nameImg = Resources.Load<Sprite>(nameImgStr);
+        playerImage.sprite = playerImg;
+        nameImage.sprite = nameImg;
+    }
+
 
     // ゲームの状態を返す
     public string GetState()

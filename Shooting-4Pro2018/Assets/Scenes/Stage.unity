@@ -2398,11 +2398,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066add8175fa6904fb25901baaebf479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1239833297249188, guid: f4ae17da961fadb40a303f0433e73c69, type: 2}
-  player_origin: {fileID: 1239833297249188, guid: f4ae17da961fadb40a303f0433e73c69,
+  player: {fileID: 0}
+  player_origin: {fileID: 1169022099372598, guid: 80d1ec599fa195345b44be633e52c481,
     type: 2}
   hpBar: {fileID: 1502927210}
   bulletBar: {fileID: 540580967}
+  nameImage: {fileID: 2146776463}
+  playerImage: {fileID: 1944020018}
 --- !u!114 &1615639035
 MonoBehaviour:
   m_ObjectHideFlags: 0
