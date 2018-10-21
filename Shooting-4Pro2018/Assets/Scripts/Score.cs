@@ -155,7 +155,7 @@ public class Score : MonoBehaviour {
         }
 
         // ランキングを表示する
-        rankingText.text = ranking_string.ToString();
+        rankingText.text = ranking_string;
     }
 
 

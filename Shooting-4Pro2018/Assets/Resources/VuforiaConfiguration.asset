@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
+    vuforiaLicenseKey: AcU4X0H/////AAABmY8jPrU5v0V3tqj8rEDksd0Yova3nehUGwnlZPzPHdJ5EFH5jgJ3dnW+dWcNS8b9VuX7bCFtYXo1fQscAzPREIjTMCScA+p79assq7wCQytVrnyD+eLouaz/v6bp76ydC/8EwYDimmKxRwUvNR9HWcHvgr0PIFlbJ8Dtp7dBLrihELhBwXVpYfkym+pNR9awtUDLNDMQFcSZMzz7RLd1GWkecQVFJiqsd4HF8xSCHKmowpU8MKnK8eil/e/dpamWVkCY/ZbID/Wb4b9abIZitMgu6PZYbCQoau0CEiTC19Pz8MzMth+VbpG/XcoMdnxLylKR8i3+3ZF/Su17T3xzKSdst/d+3j3U2uMvGSKCb4ZR
     ufoLicenseKey: QWJhUjNKdi8vLy8vQUFBQUtFZU0xK3M3SDA1bHR2MDBJcGZmcDF4cmo3MG9IMG5iUTNheWpHZisyYkxsRHcvRnp2VG1tUVM1MytuOVlZS1RUc2dXeHhhYUVDOWJ6MmYwOHVnOHkzUlMrYVQ5OFAyakN2dUZ4dlJFZEpKSXd6MlY3N0M0Y0JWbTUzVVppMFdOQVBXLy92OXVMbjBMb3d4ODBxcXNxMGlqL2JGb3FmQ2Q1Vnd6VCtQTm9SbmVmSzQxSDRBZE9jRVkyckZCMXVPbTJ2UzVkSWtmK3doMFZZdFBpMWRGNU1TSytxNHIyMFFXWExONkNXTHpyNHlZeXA2dDNBL2hORjZEaUlmbGVHQm90MFlwajYvT2dkREJnVUljUW9aQ0FVMCtoZUp0TTh0SGhHRmNhcU52bnRyenF5dFNlbjVWK2tkUVQxSVF0czdYU0MycW5LTFV6NnhMSzNLNFJQK01oUEVvRVJaM2I0V2ZVMWdyV0k4VU8rQTU=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
@@ -63,7 +63,7 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: 
+    deviceNameSetInEditor: Logicool HD Webcam C270
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30
