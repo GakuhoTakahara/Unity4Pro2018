@@ -18,6 +18,7 @@ public class RenderTextureCamera : MonoBehaviour
 	private int TextureResolutionY;
 	private Camera Render_Texture_Camera;
 	private RenderTexture CameraOutputTexture;
+    private string newId;
 
 	public RenderTexture GetRenderTexture()
 	{
@@ -84,8 +85,10 @@ public class RenderTextureCamera : MonoBehaviour
 	}
 	
 
-	public void MakeScreen() 
+	public void MakeScreen(string id,string type) 
 	{
+        newId = id;
+
 		if (screensPath == null) 
 		{
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -96,7 +99,7 @@ public class RenderTextureCamera : MonoBehaviour
 
 #else
             //screensPath = Application.dataPath + "/Screens";
-            screensPath = Application.dataPath + "/Resources/PlayerImage";
+            screensPath = Application.dataPath + "/Resources/"+type;
 
 #endif
             System.IO.Directory.CreateDirectory(screensPath);
@@ -121,7 +124,7 @@ public class RenderTextureCamera : MonoBehaviour
 
 	private string saveImg(byte[] imgPng)
 	{
-		string fileName = screensPath + "/screen_" + System.DateTime.Now.ToString("dd_MM_HH_mm_ss") + ".png";
+		string fileName = screensPath + "/" +newId + ".png";
 
 		Debug.Log("write to " + fileName);
 
