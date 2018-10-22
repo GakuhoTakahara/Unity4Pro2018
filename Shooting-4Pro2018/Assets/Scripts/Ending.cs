@@ -74,7 +74,7 @@ public class Ending : MonoBehaviour {
         Debug.Log("Called GameOvar()");
         gameOvar.SetActive(true);
         ScreenRanking();
-        Invoke("GameResults", gameOvarTime);
+        StartCoroutine("GameResults");
     }
 
 
@@ -87,7 +87,7 @@ public class Ending : MonoBehaviour {
     }
 
     // ゲーム結果を表示
-    private void GameResults()
+    IEnumerator GameResults()
     {
         // Game Clear/Ovar 画面を無効化
         gameOvar.SetActive(false);
@@ -106,6 +106,11 @@ public class Ending : MonoBehaviour {
         // ゲーム結果の値をセット
         resultsScoreText.text =_score.ToString() + " point";
         resultsRankingText.text = rankText;
+
+        yield return new WaitForSeconds(3.0f);
+        FindObjectOfType<Manager>().GameFinish();
+        gameResults.SetActive(false);
+
     }
 
     // エンディング中かどうかセットする

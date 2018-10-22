@@ -63,7 +63,7 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: Logicool HD Webcam C270
+    deviceNameSetInEditor: USB_Camera
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30

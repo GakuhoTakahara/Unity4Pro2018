@@ -31,6 +31,10 @@ public class Manager : MonoBehaviour
     // PlayerImage
     public Image playerImage;
 
+
+    // プレイ中のIDを入れる
+    private int playingId;
+
     // プレイヤーしたIDを保存するPlayerPrefKey
     private string playedIdKey = "playedId";
 
@@ -40,8 +44,13 @@ public class Manager : MonoBehaviour
         // Titleゲームオブジェクトを検索し取得する
         title = GameObject.Find("Title");
 
+        // IDをセット
+        playingId = GetPlayedId();
+        if (playingId == -1) playingId = 0;
+        SetPlayedId();
+
         // タイトルにNextPlayerをセット
-        TitleImageSet();
+        SetTitleImage(playingId);
     }
 
     void Update()
@@ -70,9 +79,11 @@ public class Manager : MonoBehaviour
         // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
         title.SetActive(false);
         Instantiate(player_origin, player_origin.transform.position, player_origin.transform.rotation);
-        //player_origin = player;
+        player = player_origin;
         player = GameObject.Find("Player(Clone)");
         playerScript = player.GetComponent<Player>();
+
+        Debug.Log("Playing ID : " + playingId);
     }
 
     // ゲームが完全に終了したときに呼ぶ
@@ -81,14 +92,15 @@ public class Manager : MonoBehaviour
         // スコア,HPのリセット
         FindObjectOfType<Score>().Initialize();
 
-        // プレイ済みのIDとを更新
-        setPlayedId();
-
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
 
+        // IDを更新
+        playingId = GetPlayedId();
+        SetPlayedId();
+
         // タイトルにNextPlayerをセット
-        TitleImageSet();
+        SetTitleImage(playingId);
     }
 
     public void SetHpBar()
@@ -124,15 +136,16 @@ public class Manager : MonoBehaviour
     }
 
     // 最後のPlay ID を取得
-    public int getPlayedId()
+    public int GetPlayedId()
     {
         return PlayerPrefs.GetInt(playedIdKey, -1);
     }
 
     // プレイ済みのIDを更新
-    public void setPlayedId()
+    public void SetPlayedId()
     {
-        var oldId = getPlayedId();
+        var oldId = GetPlayedId();
+        if (oldId == -1) oldId = 0;
         var newId = oldId + 1;
         PlayerPrefs.SetInt(playedIdKey, newId);
         PlayerPrefs.Save();
@@ -140,11 +153,11 @@ public class Manager : MonoBehaviour
     }
 
     // TitleにImageをセット
-    public void TitleImageSet()
+    public void SetTitleImage(int _id)
     {
-        string playerImgStr = "Player/" + (getPlayedId()+1).ToString();
+        string playerImgStr = "Player/" +_id.ToString();
         Sprite playerImg = Resources.Load<Sprite>(playerImgStr);
-        string nameImgStr = "Name/" + (getPlayedId() + 1).ToString();
+        string nameImgStr = "Name/" + _id.ToString();
         Sprite nameImg = Resources.Load<Sprite>(nameImgStr);
         playerImage.sprite = playerImg;
         nameImage.sprite = nameImg;

@@ -55,7 +55,7 @@ public class Score : MonoBehaviour {
         highScoreText.text = highScore.ToString();
 
         // すべてのキーをリセット
-        if(Input.GetKey(KeyCode.T)&& Input.GetKey(KeyCode.P) && Input.GetKey(KeyCode.M))
+        if(Input.GetKey(KeyCode.A)&& Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.R))
         {
             AllResetKey();
         }
@@ -202,6 +202,7 @@ public class Score : MonoBehaviour {
         PlayerPrefs.DeleteKey(highScoreKey);
         PlayerPrefs.DeleteKey(playCountKey);
         PlayerPrefs.DeleteKey(rankingPrefKey);
+        PlayerPrefs.DeleteKey("playedId");
         Debug.Log("### KEY IS ALL RESET ###");
     }
 }
