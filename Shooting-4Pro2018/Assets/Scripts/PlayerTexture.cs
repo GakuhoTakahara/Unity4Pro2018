@@ -101,7 +101,7 @@ public class PlayerTexture : MonoBehaviour {
 
         if (IsTracking() == true)
         {
-            if (Time.time - startTime <= 3)//
+            if (Time.time - startTime <= 3)
             {
                 statusText.text = "";
 
