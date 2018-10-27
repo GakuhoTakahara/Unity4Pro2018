@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class Manager : MonoBehaviour
@@ -10,6 +11,8 @@ public class Manager : MonoBehaviour
 
     // Playing Playerプレハブ
     public GameObject playing;
+
+    public GameObject eventSysytem;
 
     // カウントダウンText
     public Text textStartCountdown;
@@ -31,6 +34,9 @@ public class Manager : MonoBehaviour
 
     // ゲーム終了時ゲームオーバーかクリアか
     private string GameState = "Playing";
+
+    // キー操作を受け付けるか
+    private bool canKeyInput=true;
 
     // NameImage
     public Image nameImage;
@@ -63,7 +69,9 @@ public class Manager : MonoBehaviour
     void Update()
     {
         // ゲーム中ではなく、Xキーが押されたらtrueを返す。
-        if (IsPlaying() == false && Input.GetKeyDown(KeyCode.X))
+        if (IsPlaying() == false &&
+            GetCanKeyInput()==true &&
+            Input.GetKeyDown(KeyCode.X))
         {
             StartCoroutine("GameStart");
             //GameStart();
@@ -80,6 +88,9 @@ public class Manager : MonoBehaviour
 
     IEnumerator GameStart()
     {
+
+        // キー操作を無効にする
+        SetCanKeyInput(false);
 
         // スコアを初期化する
         FindObjectOfType<Score>().Initialize();
@@ -113,6 +124,8 @@ public class Manager : MonoBehaviour
         playerScript = playing.GetComponent<Player>();
         SetPlayerImage(playingId);
         Debug.Log("Playing ID : " + playingId);
+        // キー操作を有効にする
+        SetCanKeyInput(true);
 
     }
 
@@ -207,6 +220,23 @@ public class Manager : MonoBehaviour
     public string GetState()
     {
         return GameState;
+    }
+
+    // PlayerImageフォルダ監視
+    private bool PlayerForderMonitor()
+    {
+        return false;
+    }
+
+    // キー操作を受け付けるか
+    public bool GetCanKeyInput()
+    {
+        return canKeyInput;
+    }
+
+    public void SetCanKeyInput(bool value)
+    {
+        canKeyInput = value;
     }
 
     public bool IsPlaying()

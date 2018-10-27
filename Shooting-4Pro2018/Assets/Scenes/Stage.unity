@@ -2801,6 +2801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1169022099372598, guid: 80d1ec599fa195345b44be633e52c481, type: 2}
   playing: {fileID: 0}
+  eventSysytem: {fileID: 1871817216}
   textStartCountdown: {fileID: 1286425757}
   startCountdown: {fileID: 1200855084}
   hpBar: {fileID: 1502927210}
