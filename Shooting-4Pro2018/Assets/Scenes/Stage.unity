@@ -2691,8 +2691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1169022099372598, guid: 80d1ec599fa195345b44be633e52c481, type: 2}
-  player_origin: {fileID: 1169022099372598, guid: 80d1ec599fa195345b44be633e52c481,
-    type: 2}
+  playing: {fileID: 0}
   hpBar: {fileID: 1502927210}
   bulletBar: {fileID: 540580967}
   nameImage: {fileID: 2146776463}

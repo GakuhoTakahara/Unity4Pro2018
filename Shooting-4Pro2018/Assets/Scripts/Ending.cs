@@ -111,6 +111,9 @@ public class Ending : MonoBehaviour {
         FindObjectOfType<Manager>().GameFinish();
         gameResults.SetActive(false);
 
+        FindObjectOfType<Manager>().SetState("Playing");
+        SetEndingState(false);
+
     }
 
     // エンディング中かどうかセットする

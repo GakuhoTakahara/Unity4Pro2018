@@ -8,7 +8,7 @@ public class Manager : MonoBehaviour
     public GameObject player;
 
     // Playing Playerプレハブ
-    public GameObject player_origin;
+    public GameObject playing;
 
     // Playerスクリプト
     Player playerScript;
@@ -76,12 +76,15 @@ public class Manager : MonoBehaviour
         // スコアを初期化する
         FindObjectOfType<Score>().Initialize();
 
+        Destroy(playing);
+        Destroy(playerScript);
+
         // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
         title.SetActive(false);
-        Instantiate(player_origin, player_origin.transform.position, player_origin.transform.rotation);
-        player = player_origin;
-        player = GameObject.Find("Player(Clone)");
-        playerScript = player.GetComponent<Player>();
+        Instantiate(player, player.transform.position, player.transform.rotation);
+        //player = player_origin;
+        playing = GameObject.Find("Player(Clone)");
+        playerScript = playing.GetComponent<Player>();
 
         Debug.Log("Playing ID : " + playingId);
     }
@@ -91,6 +94,7 @@ public class Manager : MonoBehaviour
     {
         // スコア,HPのリセット
         FindObjectOfType<Score>().Initialize();
+        SetHpBar();
 
         // ゲームオーバー時に、タイトルを表示する
         title.SetActive(true);
