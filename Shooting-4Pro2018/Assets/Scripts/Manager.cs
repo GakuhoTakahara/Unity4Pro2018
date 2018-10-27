@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -9,6 +10,12 @@ public class Manager : MonoBehaviour
 
     // Playing Playerプレハブ
     public GameObject playing;
+
+    // カウントダウンText
+    public Text textStartCountdown;
+
+    // カウントダウンGameObject
+    public GameObject startCountdown;
 
     // Playerスクリプト
     Player playerScript;
@@ -58,7 +65,8 @@ public class Manager : MonoBehaviour
         // ゲーム中ではなく、Xキーが押されたらtrueを返す。
         if (IsPlaying() == false && Input.GetKeyDown(KeyCode.X))
         {
-            GameStart();
+            StartCoroutine("GameStart");
+            //GameStart();
         }
 
         // Play中ならBarをセット
@@ -70,7 +78,7 @@ public class Manager : MonoBehaviour
         }
     }
 
-    void GameStart()
+    IEnumerator GameStart()
     {
 
         // スコアを初期化する
@@ -79,14 +87,33 @@ public class Manager : MonoBehaviour
         Destroy(playing);
         Destroy(playerScript);
 
-        // ゲームスタート時に、タイトルを非表示にしてプレイヤーを作成する
+        // Titleを非表示にする
         title.SetActive(false);
+        startCountdown.SetActive(true);
+
+        // カウントダウン
+        textStartCountdown.text = "3";
+        yield return new WaitForSeconds(1.0f);
+
+        textStartCountdown.text = "2";
+        yield return new WaitForSeconds(1.0f);
+
+        textStartCountdown.text = "1";
+        yield return new WaitForSeconds(1.0f);
+
+        textStartCountdown.text = "Start";
+        yield return new WaitForSeconds(0.5f);
+
+        startCountdown.SetActive(false);
+
+
+        // ゲームスタート時に、プレイヤーを作成する
         Instantiate(player, player.transform.position, player.transform.rotation);
-        //player = player_origin;
         playing = GameObject.Find("Player(Clone)");
         playerScript = playing.GetComponent<Player>();
         SetPlayerImage(playingId);
         Debug.Log("Playing ID : " + playingId);
+
     }
 
     // ゲームが完全に終了したときに呼ぶ
@@ -184,7 +211,9 @@ public class Manager : MonoBehaviour
 
     public bool IsPlaying()
     {
-        // ゲーム中かどうかはタイトルの表示/非表示で判断する
-        return title.activeSelf == false;
+        if (title.activeSelf == false && 
+            startCountdown.activeSelf == false)return true;
+
+        return false;
     }
 }
