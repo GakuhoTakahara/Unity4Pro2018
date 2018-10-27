@@ -85,7 +85,7 @@ public class Manager : MonoBehaviour
         //player = player_origin;
         playing = GameObject.Find("Player(Clone)");
         playerScript = playing.GetComponent<Player>();
-
+        SetPlayerImage(playingId);
         Debug.Log("Playing ID : " + playingId);
     }
 
@@ -165,6 +165,14 @@ public class Manager : MonoBehaviour
         Sprite nameImg = Resources.Load<Sprite>(nameImgStr);
         playerImage.sprite = playerImg;
         nameImage.sprite = nameImg;
+    }
+
+    // PlayerにImageをセット
+    　public void SetPlayerImage(int _id)
+    {
+        string playerImgStr = "Player/" + _id.ToString();
+        Sprite playerImg = Resources.Load<Sprite>(playerImgStr);
+        playing.GetComponent<SpriteRenderer>().sprite = playerImg;
     }
 
 
