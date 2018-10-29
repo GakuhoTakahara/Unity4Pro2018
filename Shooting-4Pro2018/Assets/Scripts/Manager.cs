@@ -14,6 +14,10 @@ public class Manager : MonoBehaviour
 
     public GameObject eventSysytem;
 
+    // NextPlayer表示関係
+    public GameObject titleNextPlayer;
+    public GameObject titleText;
+
     // カウントダウンText
     public Text textStartCountdown;
 
@@ -59,11 +63,14 @@ public class Manager : MonoBehaviour
 
         // IDをセット
         playingId = GetPlayedId();
-        if (playingId == -1) playingId = 0;
-        SetPlayedId();
+        //if (playingId == -1) playingId = 0;
+        //SetPlayedId();
 
         // タイトルにNextPlayerをセット
-        SetTitleImage(playingId);
+        //SetTitleImage(playingId);
+
+        // ファイル監視を起動
+        StartCoroutine(PlayerForderMonitor());
     }
 
     void Update()
@@ -123,6 +130,7 @@ public class Manager : MonoBehaviour
         playing = GameObject.Find("Player(Clone)");
         playerScript = playing.GetComponent<Player>();
         SetPlayerImage(playingId);
+        StopCoroutine(PlayerForderMonitor());
         Debug.Log("Playing ID : " + playingId);
         // キー操作を有効にする
         SetCanKeyInput(true);
@@ -141,10 +149,13 @@ public class Manager : MonoBehaviour
 
         // IDを更新
         playingId = GetPlayedId();
+        //if (playingId == -1) playingId = 0;
         SetPlayedId();
 
         // タイトルにNextPlayerをセット
-        SetTitleImage(playingId);
+        StartCoroutine(PlayerForderMonitor());
+
+        Debug.Log("Game Finish");
     }
 
     public void SetHpBar()
@@ -182,14 +193,14 @@ public class Manager : MonoBehaviour
     // 最後のPlay ID を取得
     public int GetPlayedId()
     {
-        return PlayerPrefs.GetInt(playedIdKey, -1);
+        return PlayerPrefs.GetInt(playedIdKey, 0);
     }
 
     // プレイ済みのIDを更新
     public void SetPlayedId()
     {
         var oldId = GetPlayedId();
-        if (oldId == -1) oldId = 0;
+        //if (oldId == -1) oldId = 0;
         var newId = oldId + 1;
         PlayerPrefs.SetInt(playedIdKey, newId);
         PlayerPrefs.Save();
@@ -223,9 +234,35 @@ public class Manager : MonoBehaviour
     }
 
     // PlayerImageフォルダ監視
-    private bool PlayerForderMonitor()
+    IEnumerator PlayerForderMonitor()
     {
-        return false;
+        while (true)
+        {
+            Debug.Log("Search New Player");
+            playingId = GetPlayedId();
+            int nextid = playingId;
+            //if (nextid == -1) nextid = 0;
+            string playerImgStr = "Player/" + nextid.ToString();
+            Sprite playerImg = Resources.Load<Sprite>(playerImgStr);
+            Debug.Log("ID : "+ nextid);
+            Debug.Log(playerImg);
+            if (playerImg != null)
+            {
+                titleNextPlayer.SetActive(true);
+                titleText.SetActive(false);
+                SetCanKeyInput(true);
+                SetTitleImage(nextid);
+                Debug.Log("Find New Player");
+            }
+            else
+            {
+                titleNextPlayer.SetActive(false);
+                titleText.SetActive(true);
+                SetCanKeyInput(false);
+            }
+            // 処理を待つ
+            yield return new WaitForSeconds(5);
+        }
     }
 
     // キー操作を受け付けるか

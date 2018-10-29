@@ -149,9 +149,9 @@ public class Score : MonoBehaviour {
     {
         Debug.Log("CALLED SET RANKING");
         string ranking_string="";
-        for (var i = 0; i < (ranking.Length)||(i<=10); i++)
+        for (var i = 0; i < (ranking.Length)&&(i<=5); i++)
         {
-            ranking_string = ranking_string + (i + 1) + "  位" +"\t"+ ranking[i] +"\t"+ " point\n";
+            ranking_string = ranking_string+ranking[i] +"\n";
         }
 
         // ランキングを表示する
