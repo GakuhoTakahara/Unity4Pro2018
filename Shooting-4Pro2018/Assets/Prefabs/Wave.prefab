@@ -628,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   point: 100
-  finalBoss: 0
+  finalBoss: 1
 --- !u!114 &114329256609431478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   point: 100
-  finalBoss: 0
+  finalBoss: 1
 --- !u!114 &114805972647604550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   point: 100
-  finalBoss: 0
+  finalBoss: 1
 --- !u!212 &212418269010580502
 SpriteRenderer:
   m_ObjectHideFlags: 1

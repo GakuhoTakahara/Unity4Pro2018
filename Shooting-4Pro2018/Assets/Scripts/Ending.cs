@@ -45,6 +45,8 @@ public class Ending : MonoBehaviour {
 
                 // ゲームオーバー
                 case "GameOvar":
+                    // キー入力を受け付けない
+                    FindObjectOfType<Manager>().SetCanKeyInput(false);
                     // エンディング中にする
                     SetEndingState(true);
 
@@ -54,6 +56,8 @@ public class Ending : MonoBehaviour {
 
                 // ゲームクリア
                 case "GameClear":
+                    // キー入力を受け付けない
+                    FindObjectOfType<Manager>().SetCanKeyInput(false);
                     // エンディング中にする
                     SetEndingState(true);
 
@@ -112,9 +116,12 @@ public class Ending : MonoBehaviour {
         gameResults.SetActive(false);
 
         FindObjectOfType<Manager>().SetState("Playing");
+        // キー入力を受け付ける
+        FindObjectOfType<Manager>().SetCanKeyInput(true);
         SetEndingState(false);
 
     }
+
 
     // エンディング中かどうかセットする
     public void SetEndingState(bool state)

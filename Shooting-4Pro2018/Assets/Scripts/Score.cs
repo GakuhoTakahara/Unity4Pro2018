@@ -11,6 +11,12 @@ public class Score : MonoBehaviour {
 
     public Text highScoreText;
 
+    // ManagerObject
+    public GameObject manager;
+
+    // RankingのUsarName
+    public Image[] rankingUserName=new Image[5];
+
     // スコア
     private int score;
 
@@ -19,6 +25,9 @@ public class Score : MonoBehaviour {
 
     // 最後のスコア
     private int lastScore;
+
+    // 最後にセットしたスコア
+    private static int lastSetScore = -2;
 
     // PlayerPlefsでhighScoreを保存するときのキー
     private string highScoreKey = "highScore";
@@ -34,6 +43,11 @@ public class Score : MonoBehaviour {
 
     // ランキングを格納
     private int[] ranking = new int[RANKING_NUM];
+
+    //  ユーザーデータとスコアを保存
+    private int[] userScore = new int[RANKING_NUM];
+
+    private int[] latestRanking = new int[5];
 
     // ランキング表示のテキスト
     public Text rankingText;
@@ -95,6 +109,10 @@ public class Score : MonoBehaviour {
         SaveRanking(score);
         SetRanking();
 
+        // ランキングに画像を表示
+        SetUserData(score);
+        SetRankingNameImage();
+
         GetRank(score);
 
        // ゲーム開始前の状態に戻す
@@ -149,10 +167,14 @@ public class Score : MonoBehaviour {
     {
         Debug.Log("CALLED SET RANKING");
         string ranking_string="";
-        for (var i = 0; i < (ranking.Length)&&(i<=5); i++)
+        for (var i = 0; i < 5; i++)
         {
             ranking_string = ranking_string+ranking[i] +"\n";
+
+            latestRanking[i] = ranking[i];
+            Debug.Log("Set latest Ranking : " + latestRanking[i]);
         }
+        
 
         // ランキングを表示する
         rankingText.text = ranking_string;
@@ -189,6 +211,47 @@ public class Score : MonoBehaviour {
 
         return rankAndCount;
 
+    }
+
+    // ユーザーデータを保存
+    public void SetUserData(int newScore)
+    {
+        var userId = manager.GetComponent<Manager>().GetPlayedId();
+        userScore[userId] = newScore;
+        Debug.Log("Set User Score : " + userScore[userId]);
+
+    }
+
+    // RankingにUserNameImageを表示
+    public void SetRankingNameImage()
+    {
+        // userScoreを複製
+        var _userScore = userScore;
+
+        
+
+        for(int i=4; i>=0; i--)
+        {
+        
+            int match = -1;
+            for (int j = 0; j < RANKING_NUM; j++)
+            {
+                if (latestRanking[i] == _userScore[j])
+                {
+                    _userScore[j] = -1;
+                    match = j;
+                }
+                lastSetScore = _userScore[j];
+            }
+
+            Debug.Log("SetRankingName" + match);
+            if (match != -1)
+            {
+                string nameImgStr = "Name/" + match.ToString();
+                Sprite nameImg = Resources.Load<Sprite>(nameImgStr);
+                rankingUserName[i].sprite = nameImg;
+            }
+        }
     }
 
     // スコアを取得
